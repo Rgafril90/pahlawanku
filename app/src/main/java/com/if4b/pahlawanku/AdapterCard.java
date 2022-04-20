@@ -27,7 +27,10 @@ public class AdapterCard extends RecyclerView.Adapter<AdapterCard.CardViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
+        ModelPahlawan pahlawan = datapahlawan.get(position);
 
+        holder.tvnamapahlawan.setText(pahlawan.getNama());
+        holder.tvtentangpahlawan.setText(pahlawan.getTentang());
     }
 
     @Override
