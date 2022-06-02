@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class AdapterCard extends RecyclerView.Adapter<AdapterCard.CardViewHolder> {
@@ -16,6 +18,15 @@ public class AdapterCard extends RecyclerView.Adapter<AdapterCard.CardViewHolder
 
     public AdapterCard(ArrayList<ModelPahlawan> datapahlawan) {
         this.datapahlawan = datapahlawan;
+    }
+
+    public interface OnItemClickCallBack{
+        void onItemClicked(ModelPahlawan data);
+    }
+
+    private AdapterGrid.OnItemClickCallBack callBack;
+    public void setOnItemClickCallBack(AdapterGrid.OnItemClickCallBack callBack) {
+        this.callBack = callBack;
     }
 
     @NonNull
@@ -31,6 +42,18 @@ public class AdapterCard extends RecyclerView.Adapter<AdapterCard.CardViewHolder
 
         holder.tvnamapahlawan.setText(pahlawan.getNama());
         holder.tvtentangpahlawan.setText(pahlawan.getTentang());
+
+        Glide
+                .with(holder.itemView.getContext())
+                .load(pahlawan.getFoto())
+                .into(holder.ivpahlawan);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callBack.onItemClicked(datapahlawan.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override
