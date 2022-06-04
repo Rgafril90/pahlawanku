@@ -30,6 +30,7 @@ public class AdapterGrid extends RecyclerView.Adapter<AdapterGrid.GridViewHolder
     public void setOnItemClickCallBack(OnItemClickCallBack callBack) {
         this.callBack = callBack;
     }
+    // End Call back
 
     @NonNull
     @Override
